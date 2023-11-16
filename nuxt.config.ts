@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { 
     enabled: true 
   },
+  css: ['~/assets/main.css'],
   modules: ['@pinia/nuxt', "@nuxtjs/tailwindcss"],
   pinia: {
     storesDirs: ['./stores/**'],
