@@ -1,75 +1,36 @@
-# Nuxt 3 Minimal Starter
+# Add Pinia & Configuration It
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
+Install Pinia
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+npm install pinia @pinia/nuxt
 ```
 
-## Development Server
+Update nuxt.config.ts file for use Pinia
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+```tsx
+export default defineNuxtConfig({
+  // ... other options
+  modules: [
+    // ...
+    '@pinia/nuxt',
+  ],
+})
 ```
 
-## Production
+And you can update nuxt.config.ts for auto import store files
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+```tsx
+export default defineNuxtConfig({
+  // ... other options
+  modules: [
+	  // ...
+	  '@pinia/nuxt'
+  ],
+  pinia: {
+    storesDirs: ['./stores/**', './custom-folder/stores/**'],
+  },
+})
 ```
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+To create and use the store file, see [use-pinia](https://github.com/sinasedaghat/vue3-template/tree/use-pinia) branch in [vue3-template](https://github.com/sinasedaghat/vue3-template) project
