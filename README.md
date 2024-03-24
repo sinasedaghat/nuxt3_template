@@ -1,75 +1,96 @@
-# Nuxt 3 Minimal Starter
+# Add Vuetify & Configuration It
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
+Install Vuetify and mdi/font
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+npm i -D vuetify vite-plugin-vuetify
+npm i @mdi/font
 ```
 
-## Development Server
+Update nuxt.config.ts file for use Vuetify
 
-Start the development server on `http://localhost:3000`:
+```tsx
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+export default defineNuxtConfig({
+	// ... other options
+	// css: ['vuetify/lib/styles/main.sass'],
+  build: {
+	  // ...
+    transpile: ['vuetify'],
+  },
+  modules: [
+	  // ...
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    },
+    //...
+  ],
+  vite: {
+	  // ...
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
+  },
+})
 
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+Create vuetify.ts in plugins directory for vuetify config (basic configs)
 
-Build the application for production:
+```tsx
+// import this after install `@mdi/font` package
+import '@mdi/font/css/materialdesignicons.css'
 
-```bash
-# npm
-npm run build
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import type { ThemeDefinition } from "vuetify";
 
-# pnpm
-pnpm run build
+import * as components from "vuetify/components";
+import * as directives from "vuetify/directives";
 
-# yarn
-yarn build
+const lightTheme: ThemeDefinition = {
+  dark: false,
+  colors: {
+    primary: "#d35400",
+    secondary: "#8e44ad",
+    background: "#ecf0f1",
+    error: "#c0392b",
+    info: "#2980b9",
+    success: "#27ae60",
+    warning: "#f1c40f",
+  },
+};
 
-# bun
-bun run build
+const darkTheme: ThemeDefinition = {
+  dark: true,
+  colors: {
+    primary: "#8e44ad",
+    secondary: "#d35400",
+    background: "#2f3640",
+    error: "#27ae60",
+    info: "#f1c40f",
+    success: "#c0392b",
+    warning: "#2980b9",
+  },
+};
+
+export default defineNuxtPlugin((app) => {
+  const vuetify = createVuetify({
+    components,
+    directives,
+    theme: {
+      defaultTheme: "light",
+      themes: {
+        light: lightTheme,
+        dark: darkTheme,
+      },
+    },
+  })
+  app.vueApp.use(vuetify)
+})
 ```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
