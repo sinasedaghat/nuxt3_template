@@ -34,3 +34,5 @@ export default defineNuxtConfig({
 ```
 
 To create and use the store file, see [use-pinia](https://github.com/sinasedaghat/vue3-template/tree/use-pinia) branch in [vue3-template](https://github.com/sinasedaghat/vue3-template) project
+
+[Pinia Document](https://pinia.vuejs.org/ssr/nuxt.html#Nuxt-js)
