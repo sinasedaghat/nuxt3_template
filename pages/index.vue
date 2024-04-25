@@ -1,6 +1,6 @@
 <template>
   <div>
     this is home view
-    <!-- <Comments /> -->
+    <Comments />
   </div>
 </template>

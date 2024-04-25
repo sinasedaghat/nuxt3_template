@@ -1,6 +1,6 @@
 <template>
   <div>
     this is aboute view
-    <!-- <Comments /> -->
+    <Comments />
   </div>
 </template>
